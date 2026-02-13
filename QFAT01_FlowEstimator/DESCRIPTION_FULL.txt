@@ -1,0 +1,3 @@
+QFAT01 Flow Estimator is a QGIS plugin for quick open-channel checks. It samples a cross-section (XS) profile from a DEM along a user-drawn line, plots chainage vs elevation, and uses Manning's equation to estimate discharge Q (m3/s) or water surface level (WSL), reporting wetted area (A), wetted perimeter (P), hydraulic radius (R), velocity and freeboard. Optional exclusion zones by chainage let you ignore parts of the profile in both calculations and plotting.
+
+This tool is part of QFAT (QGIS Flood Analysis Toolkit) - a set of focused QGIS utilities designed to support flood modelling workflows (e.g., TUFLOW, HEC-RAS), hydraulic QA, and rapid engineering checks.

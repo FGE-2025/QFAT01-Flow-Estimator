@@ -1,0 +1,668 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ui version="4.0">
+ <class>QEP18FlowEstimator</class>
+ <widget class="QDialog" name="QEP18FlowEstimator">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>620</width>
+    <height>911</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>620</width>
+    <height>820</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>QEP18 - Flow Estimator</string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>10</number>
+   </property>
+   <item>
+    <widget class="QGroupBox" name="grpXSSource">
+     <property name="title">
+      <string>XS Line Source</string>
+     </property>
+     <layout class="QVBoxLayout" name="xsLayout">
+      <item>
+       <layout class="QHBoxLayout" name="xsButtonsLayout">
+        <item>
+         <widget class="QPushButton" name="btnDrawTempXS">
+          <property name="text">
+           <string>Draw Temp XS</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnUseSelectedXS">
+          <property name="text">
+           <string>Use selected XS</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnClearXS">
+          <property name="text">
+           <string>Clear XS</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnSaveXS">
+          <property name="text">
+           <string>Save XS...</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="xsGrid">
+        <item row="0" column="0">
+         <widget class="QLabel" name="lblDem">
+          <property name="text">
+           <string>DEM:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1" colspan="2">
+         <widget class="QLineEdit" name="edtDem">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="placeholderText">
+           <string>No DEM selected</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QPushButton" name="btnDemUseActive">
+          <property name="text">
+           <string>Use active layer</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4">
+         <widget class="QPushButton" name="btnDemClear">
+          <property name="text">
+           <string>Clear</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="lblSampleSpacing">
+          <property name="text">
+           <string>Sample spacing:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QComboBox" name="cboSampleSpacing">
+          <item>
+           <property name="text">
+            <string>Auto (DEM pixel)</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>0.5 x DEM pixel</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>1 x DEM pixel</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>2 x DEM pixel</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>5 m</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>10 m</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Custom...</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QLineEdit" name="edtSampleSpacingCustom">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="placeholderText">
+           <string>Custom (m)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QLabel" name="lblChainage">
+          <property name="text">
+           <string>XS Line Direction:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="4">
+         <widget class="QComboBox" name="cboChainage">
+          <item>
+           <property name="text">
+            <string>As drawn</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Reverse</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblStatus">
+        <property name="styleSheet">
+         <string>color:#666;</string>
+        </property>
+        <property name="text">
+         <string>Status: No XS</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="grpSolveMode">
+     <property name="title">
+      <string>Solve Mode</string>
+     </property>
+     <layout class="QHBoxLayout" name="solveLayout">
+      <item>
+       <widget class="QRadioButton" name="rdoInputQOutputDepth">
+        <property name="text">
+         <string>Input Q -&gt; Output Depth/WSL</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="rdoInputDepthOutputQ">
+        <property name="text">
+         <string>Input Depth -&gt; Output Q</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="spacerSolve">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>10</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="grpInput">
+     <property name="title">
+      <string>Inputs</string>
+     </property>
+     <layout class="QGridLayout" name="inputGrid">
+      <item row="0" column="0">
+       <widget class="QLabel" name="lblQIn">
+        <property name="text">
+         <string>Q (m3/s):</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="edtQ">
+        <property name="text">
+         <string>10</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="lblDepthIn">
+        <property name="text">
+         <string>Depth (m):</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLineEdit" name="edtDepth">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>0.5</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="lblS">
+        <property name="text">
+         <string>Slope (m/m):</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="edtSlopeUser">
+        <property name="text">
+         <string>0.01</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="lblN">
+        <property name="text">
+         <string>Manning's n:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLineEdit" name="edtN">
+        <property name="text">
+         <string>0.03</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="4">
+       <widget class="QLabel" name="lblExclude">
+        <property name="text">
+         <string>Exclude chainage (m) [optional]:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="4">
+       <widget class="QLineEdit" name="edtExcludeRanges">
+        <property name="placeholderText">
+         <string>Example: 0,10;70,999</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="grpResults">
+     <property name="title">
+      <string>Results (read-only)</string>
+     </property>
+     <layout class="QGridLayout" name="resultsGrid">
+      <item row="0" column="0">
+       <widget class="QLabel" name="lblQOut">
+        <property name="text">
+         <string>Q (m3/s):</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="edtQOut">
+        <property name="styleSheet">
+         <string>color:#666; background:#f5f5f5;</string>
+        </property>
+        <property name="text">
+         <string>--</string>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="lblDepthOut">
+        <property name="text">
+         <string>Depth (m):</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLineEdit" name="edtDepthOut">
+        <property name="styleSheet">
+         <string>color:#666; background:#f5f5f5;</string>
+        </property>
+        <property name="text">
+         <string>--</string>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="lblWSL">
+        <property name="text">
+         <string>WSL (m AHD):</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="edtWSL">
+        <property name="styleSheet">
+         <string>color:#666; background:#f5f5f5;</string>
+        </property>
+        <property name="text">
+         <string>--</string>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="lblA">
+        <property name="text">
+         <string>A (m2):</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLineEdit" name="edtA">
+        <property name="styleSheet">
+         <string>color:#666; background:#f5f5f5;</string>
+        </property>
+        <property name="text">
+         <string>--</string>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="lblP">
+        <property name="text">
+         <string>P (m):</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="edtP">
+        <property name="styleSheet">
+         <string>color:#666; background:#f5f5f5;</string>
+        </property>
+        <property name="text">
+         <string>--</string>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QLabel" name="lblR">
+        <property name="text">
+         <string>R (m):</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="3">
+       <widget class="QLineEdit" name="edtR">
+        <property name="styleSheet">
+         <string>color:#666; background:#f5f5f5;</string>
+        </property>
+        <property name="text">
+         <string>--</string>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="lblV">
+        <property name="text">
+         <string>V (m/s):</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="edtV">
+        <property name="styleSheet">
+         <string>color:#666; background:#f5f5f5;</string>
+        </property>
+        <property name="text">
+         <string>--</string>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QLabel" name="lblFreeboard">
+        <property name="text">
+         <string>Freeboard (m):</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="3">
+       <widget class="QLineEdit" name="edtFreeboard">
+        <property name="styleSheet">
+         <string>color:#666; background:#f5f5f5;</string>
+        </property>
+        <property name="text">
+         <string>--</string>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="lblCrestLow">
+        <property name="text">
+         <string>Crest Lower End (m AHD):</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLineEdit" name="edtCrestLow">
+        <property name="styleSheet">
+         <string>color:#666; background:#f5f5f5;</string>
+        </property>
+        <property name="text">
+         <string>--</string>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2" colspan="2">
+       <widget class="QLabel" name="lblResultNotes">
+        <property name="styleSheet">
+         <string>color:#666;</string>
+        </property>
+        <property name="text">
+         <string>Notes: --</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="grpProfile">
+     <property name="title">
+      <string>XS Profile</string>
+     </property>
+     <layout class="QVBoxLayout" name="profileLayout">
+      <item>
+       <widget class="QFrame" name="frameProfile">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>320</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <layout class="QGridLayout" name="profileGrid">
+         <property name="leftMargin">
+          <number>6</number>
+         </property>
+         <property name="topMargin">
+          <number>6</number>
+         </property>
+         <property name="rightMargin">
+          <number>6</number>
+         </property>
+         <property name="bottomMargin">
+          <number>6</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QWidget" name="plotPlaceholder" native="true">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>280</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string>background:white;</string>
+           </property>
+          </widget>
+         </item>
+        <item row="1" column="0"><widget class="QLabel" name="lblCursor"><property name="text"><string>X=, Y=</string></property><property name="alignment"><set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set></property><property name="minimumHeight"><number>18</number></property></widget></item></layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="bottomButtons">
+     <item>
+      <widget class="QPushButton" name="btnCreateWettedPoly">
+       <property name="text">
+        <string>Create Wetted Polygon Layer</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnExportCSV">
+       <property name="text">
+        <string>Export CSV</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="spacerBottom">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>10</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnCopySummary">
+       <property name="text">
+        <string>Copy Summary</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources />
+ <connections>
+  <connection>
+   <sender>rdoInputDepthOutputQ</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>edtDepth</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rdoInputDepthOutputQ</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>edtQ</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rdoInputQOutputDepth</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>edtQ</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rdoInputQOutputDepth</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>edtDepth</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

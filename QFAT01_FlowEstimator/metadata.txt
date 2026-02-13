@@ -1,0 +1,21 @@
+[general]
+name=QFAT01 Flow Estimator
+qgisMinimumVersion=3.34
+description=Open-channel flow and WSL estimator from DEM cross-sections using Manning's equation.
+version=0.4.15
+author=FG
+email=fgefge2025@gmail.com
+about=QFAT01 Flow Estimator is a QGIS plugin for quick open-channel checks. It samples a cross-section (XS) profile from a DEM along a user-drawn line, plots chainage vs elevation, and uses Manning's equation to estimate discharge Q (m3/s) or water surface level (WSL), reporting wetted area (A), wetted perimeter (P), hydraulic radius (R), velocity and freeboard. Optional exclusion zones by chainage let you ignore parts of the profile in both calculations and plotting.
+    
+    This tool is part of QFAT (QGIS Flood Analysis Toolkit) - a set of focused QGIS utilities designed to support flood modelling workflows (e.g., TUFLOW, HEC-RAS), hydraulic QA, and rapid engineering checks.
+icon=icon.png
+tags=flood,hydraulic,manning,open channel,cross section,xs,profile,water surface level,wsl,flow,discharge,wetted area,wetted perimeter,hydraulic radius,freeboard,qfat,normal depth
+homepage=https://github.com/FGE-2025/QFAT01-Flow-Estimator
+repository=https://github.com/FGE-2025/QFAT01-Flow-Estimator
+tracker=https://github.com/FGE-2025/QFAT01-Flow-Estimator/issues
+experimental=true
+license=GPL-2.0-or-later
+
+[plugin]
+hasProcessingProvider=False
+code_repository=https://github.com/FGE-2025/QFAT01-Flow-Estimator
